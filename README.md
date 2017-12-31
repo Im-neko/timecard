@@ -17,3 +17,5 @@ slackのスラッシュコマンドで勤怠管理をします。
 - falcon + gunicorn + nginx + Ubuntu16.04
 - その他ライブラリ類はpip-requirements.txtに
 
+Dockerfileあるけどまだ機能してないです
+
