@@ -1,0 +1,7 @@
+.python-version
+.DS_Store
+.env
+.idea
+venv/
+*.log
+*.pyc
