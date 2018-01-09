@@ -6,6 +6,7 @@ from datetime import datetime as datetime
 from datetime import timedelta as timedelta
 
 import pymongo
+import dateutil.parser
 
 from src.config import *
 from src import msg
@@ -119,13 +120,15 @@ def push_start_period(data, start_time, DB):
             if 'work'+work_date in co.find_one({'userId': userId}):
                 working_time = usercard['work' + work_date]['working_time']
                 working_time.append([start_time])
+                additional_rest = usercard['work' + work_date]['additional_rest']
             else:
                 working_time = [[start_time]]
+                additional_rest = []
             co.update_one({'userId': {'$eq': userId}},
                           {'$set':
                                {'work' + work_date:
                                     {'working_time': working_time,
-                                     'additional_rest': [],
+                                     'additional_rest': additional_rest,
                                      'memo': '' + memo + '\n'}}})
         apilogger.info('%r' % user_data)
         return user_data
@@ -148,11 +151,9 @@ def push_end_period(data, end_time, DB):
             if usercard:
                 additional_rest = usercard['work'+work_date]['additional_rest']
                 memo = usercard['work'+work_date]['memo'] + data['memo']
-                print(user_data['work_expire'])
                 if datetime.now() < user_data['work_expire']:
                     # 日を跨いでいない場合
                     working_time = usercard['work'+work_date]['working_time']
-                    print(working_time)
                     working_time[-1].append(end_time)
                     co.update_one({'userId': {'$eq': userId}},
                                   {'$set':
@@ -200,7 +201,10 @@ def push_end_period(data, end_time, DB):
 def push_rest_period(data, add_rest, DB):
     """追加の休憩を後から入れる"""
     try:
-        memo = data['memo']
+        try:
+            memo = data['memo'].split('~')
+        except:
+            return 'invalid form'
         slack_id = data['user_id']
         flag, user_data = getuserData(data, DB)
         if flag:
@@ -211,6 +215,7 @@ def push_rest_period(data, add_rest, DB):
                 # usercardがなかった場合
                 usercard = makeusercard(slack_id, userId, DB)
 
+            add_rest = [dateutil.parser.parse(memo[0]), dateutil.parser.parse(memo[1])]
             working_time = usercard['work' + work_date]['working_time']
             additional_rest = usercard['work' + work_date]['additional_rest'].append(add_rest)
             DB.timecard.update_one({'userId': {'$eq': userId}},
@@ -380,7 +385,10 @@ def rest_mm(data):
         memo = data['memo']
         res = push_rest_period(data, now_time, DB)
         if res:
-            msg.sendmsg('', '*' + str(data['user_name']) + '*: *'+ memo + '*')
+            if res == 'invalid form':
+                msg.sendmsg('不正なフォーマットです。\n', '*' + str(data['user_name']) + '*: *'+ memo + '*')
+            else:
+                msg.sendmsg('', '*' + str(data['user_name']) + '*: 📩*'+ memo + '*')
         else:
             msg.sendmsg('', '*1009:想定外のエラーが発生しました。管理者:に問い合わせてください。*')
         os.kill(pid, signal.SIGKILL)
