@@ -1,0 +1,24 @@
+[2017-12-30 00:56:31 +0900] [1359] [INFO] Starting gunicorn 19.7.1
+[2017-12-30 00:56:31 +0900] [1359] [INFO] Listening at: http://127.0.0.1:8000 (1359)
+[2017-12-30 00:56:31 +0900] [1359] [INFO] Using worker: sync
+[2017-12-30 00:56:31 +0900] [1362] [INFO] Booting worker with pid: 1362
+[2017-12-30 10:50:20 +0900] [1359] [INFO] Handling signal: term
+[2017-12-30 10:50:20 +0900] [1362] [INFO] Worker exiting (pid: 1362)
+[2017-12-30 10:50:20 +0900] [1359] [INFO] Shutting down: Master
+[2017-12-30 10:51:02 +0900] [1710] [INFO] Starting gunicorn 19.7.1
+[2017-12-30 10:51:02 +0900] [1710] [INFO] Listening at: http://127.0.0.1:8000 (1710)
+[2017-12-30 10:51:02 +0900] [1710] [INFO] Using worker: sync
+[2017-12-30 10:51:02 +0900] [1713] [INFO] Booting worker with pid: 1713
+[2018-01-09 08:39:55 +0900] [1713] [INFO] Worker reloading: /home/neko/timecard/src/api.py modified
+[2018-01-09 08:40:05 +0900] [1713] [INFO] Worker exiting (pid: 1713)
+[2018-01-09 08:40:05 +0900] [8145] [INFO] Booting worker with pid: 8145
+[2018-01-09 08:40:39 +0900] [8145] [INFO] Worker exiting (pid: 8145)
+[2018-01-09 08:40:39 +0900] [1710] [INFO] Handling signal: term
+[2018-01-09 08:40:39 +0900] [1710] [INFO] Shutting down: Master
+[2018-01-09 08:41:33 +0900] [8168] [INFO] Starting gunicorn 19.7.1
+[2018-01-09 08:41:33 +0900] [8168] [INFO] Listening at: http://127.0.0.1:8000 (8168)
+[2018-01-09 08:41:33 +0900] [8168] [INFO] Using worker: sync
+[2018-01-09 08:41:33 +0900] [8171] [INFO] Booting worker with pid: 8171
+[2018-01-10 08:37:17 +0900] [8168] [INFO] Handling signal: term
+[2018-01-10 08:37:17 +0900] [8171] [INFO] Worker exiting (pid: 8171)
+[2018-01-10 08:37:17 +0900] [8168] [INFO] Shutting down: Master

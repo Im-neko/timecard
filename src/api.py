@@ -256,7 +256,7 @@ def time_in(data):
         if res:
             work_expire = datetime.now() + timedelta(days=1)
             DB.user.update_one({'_id': {'$eq': res['_id']}}, {'$set':{'work_expire': work_expire, 'working_flag': 0}})
-            msg.sendmsg('', '*' + str(data['user_name']) + '*: *'+ memo + '*')
+            msg.sendmsg('', '*' + str(data['user_name']) + '*: 🏢*'+ memo + '*')
         else:
             msg.sendmsg('', '*1001:想定外のエラーが発生しました。管理しゃに問い合わせてください。*')
         apilogger.info('%r' % user_data)
@@ -291,7 +291,7 @@ def time_out(data):
             res = push_end_period(data, now_time, DB)
         if res:
             DB.user.update_one({'_id': {'$eq': res['_id']}}, {'$set':{'work_expire': '', 'working_flag': 2}})
-            msg.sendmsg('', '*' + str(data['user_name']) + '*: *' + memo + '*')
+            msg.sendmsg('', '*' + str(data['user_name']) + '*: 🏠*' + memo + '*')
         else:
             msg.sendmsg('', '*1003:想定外のエラーが発生しました。管理者に問い合わせてください*')
     except:
@@ -326,7 +326,7 @@ def rest_s(data):
             res = push_end_period(data, now_time, DB)
         if res:
             DB.user.update_one({'_id': {'$eq': res['_id']}}, {'$set':{'working_flag': 1}})
-            msg.sendmsg('', '*' + str(data['user_name']) + '*: *' + memo + '*')
+            msg.sendmsg('', '*' + str(data['user_name']) + '*: 🍵*' + memo + '*')
         else:
             msg.sendmsg('', '*1005:想定外のエラーが発生しました。管理者に問い合わせてください*')
         os.kill(pid, signal.SIGKILL)
@@ -362,7 +362,7 @@ def rest_e(data):
             res = push_start_period(data, now_time, DB)
         if res:
             DB.user.update_one({'_id': {'$eq': res['_id']}}, {'$set':{'working_flag': 0}})
-            msg.sendmsg('', '*' + str(data['user_name']) + '*: *' + memo + '*')
+            msg.sendmsg('', '*' + str(data['user_name']) + '*: 💻*' + memo + '*')
         else:
             msg.sendmsg('', '*1007:想定外のエラーが発生しました。管理者に連絡してください。*')
         os.kill(pid, signal.SIGKILL)
