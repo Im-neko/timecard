@@ -201,9 +201,13 @@ def push_end_period(data, end_time, DB):
 def push_rest_period(data, add_rest, DB):
     """追加の休憩を後から入れる"""
     try:
+        msg = data['memo']
         try:
             memo = data['memo'].split('~')
+            if len(memo) != 2:
+                raise
         except:
+	    apilogger.warning('%r' % user_data)
             return 'invalid form'
         slack_id = data['user_id']
         flag, user_data = getuserData(data, DB)
@@ -216,6 +220,7 @@ def push_rest_period(data, add_rest, DB):
                 usercard = makeusercard(slack_id, userId, DB)
 
             add_rest = [dateutil.parser.parse(memo[0]), dateutil.parser.parse(memo[1])]
+            raw_memo = usercard['work' + work_date]['memo']
             working_time = usercard['work' + work_date]['working_time']
             additional_rest = usercard['work' + work_date]['additional_rest'].append(add_rest)
             DB.timecard.update_one({'userId': {'$eq': userId}},
@@ -223,7 +228,7 @@ def push_rest_period(data, add_rest, DB):
                                         {'work' + work_date:
                                              {'working_time': working_time,
                                               'additional_rest': additional_rest,
-                                              'memo': '' + memo + '\n'}}})
+                                              'memo': raw_memo + str(msg) + '\n'}}})
         apilogger.info('%r' % user_data)
         return user_data
     except:
@@ -391,6 +396,8 @@ def rest_mm(data):
                 msg.sendmsg('', '*' + str(data['user_name']) + '*: 📩*'+ memo + '*')
         else:
             msg.sendmsg('', '*1009:想定外のエラーが発生しました。管理者:に問い合わせてください。*')
+            trace = traceback.format_exc()
+            apilogger.error('[TRACE]:%r' % trace)
         os.kill(pid, signal.SIGKILL)
     except:
         msg.sendmsg('', '*1010:想定外のエラーが発生しました。管理者に問い合わせてください*')
