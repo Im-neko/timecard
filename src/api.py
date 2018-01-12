@@ -52,7 +52,7 @@ apilogger = get_module_logger(__name__, 'api.log')
 
 timecard = 'timecard'+(datetime.now()).strftime('%Y%m')
 work_date = str(datetime.now().day)
-place = {'-l':'lab', '-s':'shibuya', '-r':'remote'}
+place = {'l':'lab', 's':'shibuya', 'r':'remote'}
 
 def getuserData(data, DB):
     """ 
@@ -246,7 +246,7 @@ def time_in(data):
         try:
             memo = memo.split('-')
             if memo[-1] in place:
-                memo[-1] = ':working at:' + place[memo[-1]]
+                memo[-1] = ':working at ' + place[memo[-1]]
                 memo = '\n'.join(memo)
             else:
                 raise
@@ -273,7 +273,7 @@ def time_in(data):
         if res:
             work_expire = datetime.now() + timedelta(days=1)
             DB.user.update_one({'_id': {'$eq': res['_id']}}, {'$set':{'work_expire': work_expire, 'working_flag': 0}})
-            msg.sendmsg('', '*' + str(data['user_name']) + '*: 🏢*'+ memo + '*')
+            msg.sendmsg('', '*' + str(data['user_name']) + '*: 🏢'+ memo + '')
         else:
             msg.sendmsg('', '*1001:想定外のエラーが発生しました。管理しゃに問い合わせてください。*')
         apilogger.info('%r' % user_data)
@@ -416,4 +416,10 @@ def rest_mm(data):
         trace = traceback.format_exc()
         apilogger.error('[TRACE]:%r' % trace)
         os.kill(pid, signal.SIGKILL)
+
+
+def add_start_time(data):
+    """
+    後から開始時間を追加
+    """
 
