@@ -52,7 +52,7 @@ apilogger = get_module_logger(__name__, 'api.log')
 
 timecard = 'timecard'+(datetime.now()).strftime('%Y%m')
 work_date = str(datetime.now().day)
-
+place = {'-l':'lab', '-s':'shibuya', '-r':'remote'}
 
 def getuserData(data, DB):
     """ 
@@ -243,6 +243,18 @@ def time_in(data):
         pid = os.getpid()
         now_time = datetime.now()
         memo = data['memo']
+        try:
+            memo = memo.split('-')
+            if memo[-1] in place:
+                memo[-1] = ':working at:' + place[memo[-1]]
+                memo = '\n'.join(memo)
+            else:
+                raise
+        except:
+            msg.sendmsg('不正なフォーマットです', '"'+str(memo)+'"' )
+            apilogger.warning('%r' % data)
+            os.kill(pid, signal.SIGKILL)
+
         client = pymongo.MongoClient(MONGO_NAME, int(MONGO_PORT))
         DB = client[MONGO_DB]
         user_data = DB.user.find_one({'slack_id': data['user_id']})

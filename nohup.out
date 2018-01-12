@@ -105,3 +105,10 @@ AttributeError: 'NoneType' object has no attribute 'add_extra_file'
 [2018-01-12 10:27:07 +0900] [2339] [INFO] Listening at: http://127.0.0.1:8000 (2339)
 [2018-01-12 10:27:07 +0900] [2339] [INFO] Using worker: sync
 [2018-01-12 10:27:07 +0900] [2342] [INFO] Booting worker with pid: 2342
+[2018-01-12 10:42:21 +0900] [2342] [INFO] Worker exiting (pid: 2342)
+[2018-01-12 10:42:21 +0900] [2339] [INFO] Handling signal: term
+[2018-01-12 10:42:21 +0900] [2339] [INFO] Shutting down: Master
+[2018-01-12 10:43:12 +0900] [2435] [INFO] Starting gunicorn 19.7.1
+[2018-01-12 10:43:12 +0900] [2435] [INFO] Listening at: http://127.0.0.1:8000 (2435)
+[2018-01-12 10:43:12 +0900] [2435] [INFO] Using worker: sync
+[2018-01-12 10:43:12 +0900] [2438] [INFO] Booting worker with pid: 2438
