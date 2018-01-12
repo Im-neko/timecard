@@ -17,8 +17,7 @@ class Test():
     def on_get(self, req, res):
         reqlogger.debug('[HEADER]:%r' % req.headers +
                         '[ADDRESS]:%r' % req.remote_addr +
-                        '[METHOD]:%r' % req.method +
-                        '[BODY]:%r' % data)
+                        '[METHOD]:%r' % req.method)
         res.status = falcon.HTTP_200
         res.body = json.dumps({'message': 'alive'})
 

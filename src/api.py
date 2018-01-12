@@ -207,7 +207,7 @@ def push_rest_period(data, add_rest, DB):
             if len(memo) != 2:
                 raise
         except:
-	    apilogger.warning('%r' % user_data)
+            apilogger.warning('%r' % data)
             return 'invalid form'
         slack_id = data['user_id']
         flag, user_data = getuserData(data, DB)

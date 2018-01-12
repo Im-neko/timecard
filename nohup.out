@@ -22,3 +22,86 @@
 [2018-01-10 08:37:17 +0900] [8168] [INFO] Handling signal: term
 [2018-01-10 08:37:17 +0900] [8171] [INFO] Worker exiting (pid: 8171)
 [2018-01-10 08:37:17 +0900] [8168] [INFO] Shutting down: Master
+[2018-01-10 09:00:54 +0900] [9271] [INFO] Starting gunicorn 19.7.1
+[2018-01-10 09:00:54 +0900] [9271] [INFO] Listening at: http://127.0.0.1:8000 (9271)
+[2018-01-10 09:00:54 +0900] [9271] [INFO] Using worker: sync
+[2018-01-10 09:00:54 +0900] [9274] [INFO] Booting worker with pid: 9274
+[2018-01-10 09:00:54 +0900] [9274] [ERROR] inconsistent use of tabs and spaces in indentation (api.py, line 210)
+Traceback (most recent call last):
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/workers/base.py", line 135, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/util.py", line 352, in import_app
+    __import__(module)
+  File "/home/neko/timecard/server.py", line 5, in <module>
+    from src import Commands
+  File "/home/neko/timecard/src/Commands.py", line 9, in <module>
+    from src import api
+  File "/home/neko/timecard/src/api.py", line 210
+    apilogger.warning('%r' % user_data)
+                                      ^
+TabError: inconsistent use of tabs and spaces in indentation
+[2018-01-10 09:00:54 +0900] [9274] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/workers/base.py", line 135, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/app/wsgiapp.py", line 65, in load
+    return self.load_wsgiapp()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/app/wsgiapp.py", line 52, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/util.py", line 352, in import_app
+    __import__(module)
+  File "/home/neko/timecard/server.py", line 5, in <module>
+    from src import Commands
+  File "/home/neko/timecard/src/Commands.py", line 9, in <module>
+    from src import api
+  File "/home/neko/timecard/src/api.py", line 210
+    apilogger.warning('%r' % user_data)
+                                      ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/arbiter.py", line 578, in spawn_worker
+    worker.init_process()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/home/neko/timecard/venv/timecard/lib/python3.5/site-packages/gunicorn/workers/base.py", line 148, in load_wsgi
+    self.reloader.add_extra_file(exc_val.filename)
+AttributeError: 'NoneType' object has no attribute 'add_extra_file'
+[2018-01-10 09:00:54 +0900] [9274] [INFO] Worker exiting (pid: 9274)
+[2018-01-10 09:00:54 +0900] [9271] [INFO] Shutting down: Master
+[2018-01-10 09:00:54 +0900] [9271] [INFO] Reason: Worker failed to boot.
+[2018-01-10 19:53:48 +0900] [9675] [INFO] Starting gunicorn 19.7.1
+[2018-01-10 19:53:48 +0900] [9675] [INFO] Listening at: http://127.0.0.1:8000 (9675)
+[2018-01-10 19:53:48 +0900] [9675] [INFO] Using worker: sync
+[2018-01-10 19:53:48 +0900] [9678] [INFO] Booting worker with pid: 9678
+[2018-01-10 19:56:56 +0900] [9675] [INFO] Handling signal: term
+[2018-01-10 19:56:56 +0900] [9678] [INFO] Worker exiting (pid: 9678)
+[2018-01-10 19:56:57 +0900] [9675] [INFO] Shutting down: Master
+[2018-01-10 19:57:38 +0900] [9791] [INFO] Starting gunicorn 19.7.1
+[2018-01-10 19:57:38 +0900] [9791] [INFO] Listening at: http://127.0.0.1:8000 (9791)
+[2018-01-10 19:57:38 +0900] [9791] [INFO] Using worker: sync
+[2018-01-10 19:57:38 +0900] [9794] [INFO] Booting worker with pid: 9794
+[2018-01-10 19:57:40 +0900] [9791] [INFO] Handling signal: int
+[2018-01-10 19:57:40 +0900] [9794] [INFO] Worker exiting (pid: 9794)
+[2018-01-10 19:57:40 +0900] [9791] [INFO] Shutting down: Master
+[2018-01-10 19:57:49 +0900] [9797] [INFO] Starting gunicorn 19.7.1
+[2018-01-10 19:57:49 +0900] [9797] [INFO] Listening at: http://127.0.0.1:8000 (9797)
+[2018-01-10 19:57:49 +0900] [9797] [INFO] Using worker: sync
+[2018-01-10 19:57:49 +0900] [9800] [INFO] Booting worker with pid: 9800
+[2018-01-10 19:58:38 +0900] [9797] [INFO] Handling signal: term
+[2018-01-10 19:58:38 +0900] [9800] [INFO] Worker exiting (pid: 9800)
+[2018-01-10 19:58:38 +0900] [9797] [INFO] Shutting down: Master
+[2018-01-12 10:27:07 +0900] [2339] [INFO] Starting gunicorn 19.7.1
+[2018-01-12 10:27:07 +0900] [2339] [INFO] Listening at: http://127.0.0.1:8000 (2339)
+[2018-01-12 10:27:07 +0900] [2339] [INFO] Using worker: sync
+[2018-01-12 10:27:07 +0900] [2342] [INFO] Booting worker with pid: 2342
