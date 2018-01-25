@@ -1,9 +1,8 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
-RUN mkdir -p /usr/timecard/
-WORKDIR /usr/timecard/
-ADD pip-requirements.txt /usr/timecard/
+RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/static
+WORKDIR /usr/src/app
+ADD pip-requirements.txt /usr/src/app/
 RUN pip install -r pip-requirements.txt
-ADD . /usr/timecard/
-RUN ls
-ENTRYPOINT ['gunicorn', 'server:api', '-D']
+ADD . /usr/src/app/

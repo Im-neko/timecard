@@ -13,5 +13,12 @@ def sendmsg(name, text):
         'username': 'MFcloud',
     }))
 
+def senderr(name, text):
+    msg = name + ': ' + str(text)
+    requests.post(ERROR_URL, data = json.dumps({
+        'text': msg,
+        'username': 'MFcloud',
+    }))
+
 if __name__ == '__main__':
     sendmsg('test', 'test dayo-\nすっごーい！！')
