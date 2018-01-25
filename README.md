@@ -13,7 +13,7 @@ slackのスラッシュコマンドで勤怠管理をします。
 
 ### 環境
 - python3.6
-- falcon + gunicorn + nginx + Ubuntu16.04
+- falcon + gunicorn + nginx + MongoDB + Ubuntu16.04
 - その他ライブラリ類はpip-requirements.txtに
 
 Dockerfileあるけどまだ機能してないです
